@@ -18,7 +18,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173", 
         "http://localhost:5174",
-        "https://your-app-name.vercel.app",  # Update this with your actual Vercel domain
+        "https://ai-job-resume-coach-cwkkgiard-abdullah-dahabres-projects.vercel.app/",
         "https://*.vercel.app"  # Allow all Vercel preview deployments
     ],
     allow_credentials=True,
