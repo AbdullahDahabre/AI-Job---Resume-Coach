@@ -17,11 +17,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173", 
-        "http://localhost:5174",
-        "https://ai-job-resume-coach.vercel.app",  # Actual domain
-        "https://ai-job-resume-coach-66v2zr2pz-abdullah-dahabres-projects.vercel.app/",
-        "https://ai-job-resume-coach-66v2zr2pz-abdullah-dahabres-projects.vercel.app",
-        "https://ai-job-resume-coach-git-main-abdullah-dahabres-projects.vercel.app/"  # Deployment URL
+        "https://ai-job-resume-coach.vercel.app",
         "https://*.vercel.app"  # Allow all Vercel preview deployments
     ],
     allow_credentials=True,

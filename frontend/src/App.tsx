@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { apiService } from './services/api';
 import HomeSection from './components/HomeSection';
 import FeedbackSection from './components/FeedbackSection';
 import CoverLetterSection from './components/CoverLetterSection';
@@ -151,7 +152,8 @@ function App() {
   const jobRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    fetch('http://localhost:8000/')
+    const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://ai-job-resume-coach.onrender.com';
+    fetch(API_BASE_URL)
       .then((res) => res.json())
       .then((data) => setBackendMsg(data.message))
       .catch(() => setBackendMsg('❌ Failed to connect to backend'));
@@ -186,16 +188,9 @@ function App() {
     setResumeText('');
     setJobMatches([]);
 
-    const formData = new FormData();
-    formData.append('file', uploadedFile);
-
     try {
       console.log("🔄 Uploading resume...");
-      const res = await fetch('http://localhost:8000/extract-resume', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
+      const data = await apiService.extractResumeText(uploadedFile);
       console.log("📄 Resume extracted:", data);
       const resumeText = data.text || '';
       setResumeText(resumeText);
@@ -210,12 +205,7 @@ function App() {
     if (!resumeText) return;  
     setIsGeneratingLinks(true);
     try {
-      const res = await fetch('http://localhost:8000/generate-links', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resume: resumeText }),
-      });
-      const data = await res.json();
+      const data = await apiService.generateJobLinks(resumeText);
       console.log("🔗 Generated search links:", data);
       setJobMatches(Array.isArray(data?.search_links) ? data.search_links : []);
     } catch (err) {
@@ -232,17 +222,9 @@ function App() {
     setFeedback('');
     setResumeScore({});
 
-    const formData = new FormData();
-    formData.append('file', file);
-
     try {
-      const res = await fetch('http://localhost:8000/upload-resume', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await res.json();
-      setFeedback(data.feedback || data.error);
+      const data = await apiService.analyzeResume(file);
+      setFeedback(data.feedback || 'No feedback received');
 
       if (data.scores) {
         setResumeScore(data.scores);
@@ -251,6 +233,7 @@ function App() {
       }
     } catch (err) {
       console.error(err);
+      setFeedback('❌ Failed to get feedback');
     } finally {
       setIsFeedbackLoading(false);
     }
@@ -264,13 +247,7 @@ function App() {
     setQaExpanded([]);
 
     try {
-      const res = await fetch('http://localhost:8000/interview-trainer', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resume: resumeText, job: jobPost })
-      });
-
-      const data = await res.json();
+      const data = await apiService.generateInterviewQuestions(resumeText, jobPost);
 
       if (data.pairs && Array.isArray(data.pairs)) {
         setQaPairs(data.pairs);
@@ -292,17 +269,8 @@ function App() {
     setCoverLetter('');
 
     try {
-      const res = await fetch('http://localhost:8000/generate-cover-letter', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          resume: resumeText,
-          job: jobPost,
-        }),
-      });
-
-      const data = await res.json();
-      setCoverLetter(data.letter || data.error);
+      const data = await apiService.generateCoverLetter(resumeText, jobPost);
+      setCoverLetter(data.letter || 'Failed to generate cover letter');
     } catch (err) {
       console.error(err);
       setCoverLetter('❌ Failed to generate cover letter');
