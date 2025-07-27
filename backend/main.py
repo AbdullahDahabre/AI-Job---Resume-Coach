@@ -35,6 +35,10 @@ async def root():
     """Health check endpoint"""
     return {"message": "🚀 Transform your career with AI-powered resume feedback, personalized cover letters, interview preparation, and job matching - all in one platform!"}
 
+@app.head("/")
+async def head_root():
+    return
+
 async def extract_text_from_pdf(contents: bytes) -> str:
     """Extract text content from PDF file."""
     try:
