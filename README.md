@@ -159,7 +159,7 @@ npm run dev
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 🚀 Deployment Guide
+## Deployment Guide
 
 This project is designed to be deployed 100% free using:
 - **Vercel** for frontend hosting
@@ -264,7 +264,7 @@ After deployment, update the backend CORS origins:
    - Interview questions
    - Job search links
 
-## 💰 Cost Breakdown (All Free!)
+## Cost Breakdown (All Free!)
 
 - **Vercel**: Free tier includes 100GB bandwidth, unlimited personal projects
 - **Render**: Free tier includes 750 hours/month (enough for personal use)
