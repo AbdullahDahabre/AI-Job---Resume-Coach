@@ -24,25 +24,6 @@ A comprehensive AI-powered job application assistant that helps you optimize you
 - **PyMuPDF (fitz)** for PDF text extraction
 - Clean, modular architecture with all endpoints in main.py
 
-## Local Development
-
-### Backend Setup
-```bash
-cd backend
-pip install -r requirements.txt
-cp .env.example .env
-# Edit .env with your Groq API key
-uvicorn main:app --reload
-```
-
-### Frontend Setup
-```bash
-cd frontend
-npm install
-cp .env.example .env
-# Edit .env with your backend URL
-npm run dev
-```
 
 ## Project Structure
 
@@ -127,20 +108,6 @@ npm run dev
 
 4. Open your browser to `http://localhost:5173`
 
-## API Endpoints
-
-### Resume Analysis
-- `POST /analyze-resume` - Upload PDF resume for analysis and scoring
-- `POST /extract-resume` - Extract text content from PDF resume
-
-### Cover Letters
-- `POST /generate-cover-letter` - Generate personalized cover letter
-
-### Interview Preparation
-- `POST /interview-trainer` - Generate interview Q&A pairs
-
-### Job Search
-- `POST /generate-links` - Get personalized job search links
 
 ## Features in Detail
 
@@ -167,6 +134,23 @@ npm run dev
 - Generates targeted search URLs for major job platforms
 - Personalized search queries based on your background
 
+
+## API Endpoints
+
+### Resume Analysis
+- `POST /analyze-resume` - Upload PDF resume for analysis and scoring
+- `POST /extract-resume` - Extract text content from PDF resume
+
+### Cover Letters
+- `POST /generate-cover-letter` - Generate personalized cover letter
+
+### Interview Preparation
+- `POST /interview-trainer` - Generate interview Q&A pairs
+
+### Job Search
+- `POST /generate-links` - Get personalized job search links
+
+
 ## Contributing
 
 1. Fork the repository
@@ -175,7 +159,7 @@ npm run dev
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 🚀 Free Deployment Guide
+## 🚀 Deployment Guide
 
 This project is designed to be deployed 100% free using:
 - **Vercel** for frontend hosting
