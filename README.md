@@ -1,6 +1,6 @@
 # AI Job & Resume Coach
 
-**Live Demo:** [https://ai-job-resume-coach.vercel.app/](https://ai-job-resume-coach.vercel.app/)
+**Live Demo:** [https://ai-job-resume-coach.vercel.app](https://ai-job-resume-coach.vercel.app)
 
 A comprehensive AI-powered job application assistant that helps you optimize your resume, generate cover letters, practice interviews, and find relevant job opportunities.
 
