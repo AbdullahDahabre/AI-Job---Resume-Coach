@@ -1,6 +1,10 @@
 # AI Job & Resume Coach
 
+**Live Demo:** [https://ai-job-resume-coach.vercel.app/](https://ai-job-resume-coach.vercel.app/)
+
 A comprehensive AI-powered job application assistant that helps you optimize your resume, generate cover letters, practice interviews, and find relevant job opportunities.
+
+![UI](./UI/jobcoachui.png)
 
 ## Features
 
@@ -24,7 +28,142 @@ A comprehensive AI-powered job application assistant that helps you optimize you
 - **PyMuPDF (fitz)** for PDF text extraction
 - Clean, modular architecture with all endpoints in main.py
 
-## 🚀 Free Deployment Guide
+
+## Project Structure
+
+```
+jobcoach/
+├── frontend/
+│   ├── src/
+│   │   ├── components/          # Reusable UI components
+│   │   │   ├── HomeSection.tsx
+│   │   │   ├── FeedbackSection.tsx
+│   │   │   ├── CoverLetterSection.tsx
+│   │   │   ├── InterviewSection.tsx
+│   │   │   ├── JobMatchingSection.tsx
+│   │   │   ├── Navigation.tsx
+│   │   │   ├── Notification.tsx
+│   │   │   └── ResumeScoreChart.tsx
+│   │   ├── services/            # API service layer
+│   │   │   └── api.ts
+│   │   ├── types/               # TypeScript type definitions
+│   │   │   └── index.ts
+│   │   ├── App.tsx              # Main application component
+│   │   └── main.tsx             # Application entry point
+│   ├── package.json
+│   └── vite.config.ts
+├── backend/
+│   ├── main.py                  # FastAPI application entry point with all routes
+│   └── requirements.txt
+└── README.md
+```
+
+## Setup Instructions
+
+### Prerequisites
+- Node.js 18+ and npm/yarn
+- Python 3.8+
+- Groq API key (for AI features)
+
+### Backend Setup
+
+1. Navigate to the backend directory:
+```bash
+cd backend
+```
+
+2. Create a virtual environment:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+3. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+4. Create a `.env` file with your API keys:
+```env
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+5. Start the development server:
+```bash
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+### Frontend Setup
+
+1. Navigate to the frontend directory:
+```bash
+cd frontend
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Start the development server:
+```bash
+npm run dev
+```
+
+4. Open your browser to `http://localhost:5173`
+
+
+## Features in Detail
+
+### Resume Feedback
+- Upload PDF resumes for automatic text extraction
+- Get comprehensive AI feedback on content, structure, and presentation
+- Visual scoring across multiple categories (experience, skills, formatting, etc.)
+- Actionable recommendations for improvement
+
+### Cover Letter Generator
+- Input job descriptions to generate tailored cover letters
+- AI matches your resume experience to job requirements
+- Professional formatting and tone
+- Copy to clipboard or save as text file
+
+### Interview Trainer
+- Generates 10 realistic interview questions (5 based on resume, 5 based on job description)
+- Provides suggested answers for each question
+- Interactive show/hide answer functionality
+- Export all Q&A for offline practice
+
+### Job Search Assistant
+- Analyzes your resume to extract relevant skills and experience
+- Generates targeted search URLs for major job platforms
+- Personalized search queries based on your background
+
+
+## API Endpoints
+
+### Resume Analysis
+- `POST /analyze-resume` - Upload PDF resume for analysis and scoring
+- `POST /extract-resume` - Extract text content from PDF resume
+
+### Cover Letters
+- `POST /generate-cover-letter` - Generate personalized cover letter
+
+### Interview Preparation
+- `POST /interview-trainer` - Generate interview Q&A pairs
+
+### Job Search
+- `POST /generate-links` - Get personalized job search links
+
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Deployment Guide
 
 This project is designed to be deployed 100% free using:
 - **Vercel** for frontend hosting
@@ -129,167 +268,16 @@ After deployment, update the backend CORS origins:
    - Interview questions
    - Job search links
 
-## 💰 Cost Breakdown (All Free!)
+## Cost Breakdown (All Free!)
 
 - **Vercel**: Free tier includes 100GB bandwidth, unlimited personal projects
 - **Render**: Free tier includes 750 hours/month (enough for personal use)
 - **Groq API**: Free tier includes sufficient requests for testing and moderate use
 - **GitHub**: Free for public repositories
 
-## Local Development
-
-### Backend Setup
-```bash
-cd backend
-pip install -r requirements.txt
-cp .env.example .env
-# Edit .env with your Groq API key
-uvicorn main:app --reload
-```
-
-### Frontend Setup
-```bash
-cd frontend
-npm install
-cp .env.example .env
-# Edit .env with your backend URL
-npm run dev
-```
-
-## Project Structure
-
-```
-jobcoach/
-├── frontend/
-│   ├── src/
-│   │   ├── components/          # Reusable UI components
-│   │   │   ├── HomeSection.tsx
-│   │   │   ├── FeedbackSection.tsx
-│   │   │   ├── CoverLetterSection.tsx
-│   │   │   ├── InterviewSection.tsx
-│   │   │   ├── JobMatchingSection.tsx
-│   │   │   ├── Navigation.tsx
-│   │   │   ├── Notification.tsx
-│   │   │   └── ResumeScoreChart.tsx
-│   │   ├── services/            # API service layer
-│   │   │   └── api.ts
-│   │   ├── types/               # TypeScript type definitions
-│   │   │   └── index.ts
-│   │   ├── App.tsx              # Main application component
-│   │   └── main.tsx             # Application entry point
-│   ├── package.json
-│   └── vite.config.ts
-├── backend/
-│   ├── main.py                  # FastAPI application entry point with all routes
-│   └── requirements.txt
-└── README.md
-```
-
-## Setup Instructions
-
-### Prerequisites
-- Node.js 18+ and npm/yarn
-- Python 3.8+
-- Groq API key (for AI features)
-
-### Backend Setup
-
-1. Navigate to the backend directory:
-```bash
-cd backend
-```
-
-2. Create a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-4. Create a `.env` file with your API keys:
-```env
-GROQ_API_KEY=your_groq_api_key_here
-```
-
-5. Start the development server:
-```bash
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-```bash
-cd frontend
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm run dev
-```
-
-4. Open your browser to `http://localhost:5173`
-
-## API Endpoints
-
-### Resume Analysis
-- `POST /analyze-resume` - Upload PDF resume for analysis and scoring
-- `POST /extract-resume` - Extract text content from PDF resume
-
-### Cover Letters
-- `POST /generate-cover-letter` - Generate personalized cover letter
-
-### Interview Preparation
-- `POST /interview-trainer` - Generate interview Q&A pairs
-
-### Job Search
-- `POST /generate-links` - Get personalized job search links
-
-## Features in Detail
-
-### Resume Feedback
-- Upload PDF resumes for automatic text extraction
-- Get comprehensive AI feedback on content, structure, and presentation
-- Visual scoring across multiple categories (experience, skills, formatting, etc.)
-- Actionable recommendations for improvement
-
-### Cover Letter Generator
-- Input job descriptions to generate tailored cover letters
-- AI matches your resume experience to job requirements
-- Professional formatting and tone
-- Copy to clipboard or save as text file
-
-### Interview Trainer
-- Generates 10 realistic interview questions (5 based on resume, 5 based on job description)
-- Provides suggested answers for each question
-- Interactive show/hide answer functionality
-- Export all Q&A for offline practice
-
-### Job Search Assistant
-- Analyzes your resume to extract relevant skills and experience
-- Generates targeted search URLs for major job platforms
-- Personalized search queries based on your background
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the Apache License 2.0 License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
