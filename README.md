@@ -4,7 +4,7 @@
 
 A comprehensive AI-powered job application assistant that helps you optimize your resume, generate cover letters, practice interviews, and find relevant job opportunities.
 
-![UI](./UI/jobcoachui.png)
+![UI](UI/jobcoachui.PNG)
 
 ## Features
 
